@@ -36,22 +36,22 @@ SignalHandler::SignalHandler(int signal_number, SignalHandler_t handler_function
     memset(&curent_signal_action, 0, sizeof(curent_signal_action));
 
     // check handler function
-    if (handler_function == nullptr) throw std::invalid_argument(
-            "Unable to establish a signal handler with no handler function.");
+    if (handler_function == nullptr)
+        throw std::invalid_argument("Unable to establish a signal handler with no handler function.");
 
     // SA_SIGINFO flag is set ? --> extended Signal handler must be used
     if (sa_flags & SA_SIGINFO) throw std::invalid_argument(
             "Flag SA_SIGINFO, but handler function is of the wrong type.");
 
     // check signal range
-    if (signal_number < SIGHUP || signal_number > SIGRTMAX) throw std::invalid_argument(
-            "Invalid signal number (out of range).");
+    if (signal_number < SIGHUP || signal_number > SIGRTMAX)
+        throw std::invalid_argument("Invalid signal number (out of range).");
 
     if (signal_number == SIGKILL)	// can not override KILL signal handler
-    throw std::invalid_argument("Action for signal SIGKILL can not be changed.");
+        throw std::invalid_argument("Action for signal SIGKILL can not be changed.");
 
     if (signal_number == SIGSTOP)	// can not override STOP signal handler
-    throw std::invalid_argument("Action for signal SIGSTOP can not be changed.");
+        throw std::invalid_argument("Action for signal SIGSTOP can not be changed.");
 
     // set handler function and flags
     curent_signal_action.sa_handler = handler_function;
@@ -73,18 +73,18 @@ SignalHandler::SignalHandler(int signal_number, SignalHandler_extended_t handler
     sa_flags |= SA_SIGINFO;
 
     // check handler function
-    if (handler_function == nullptr) throw std::invalid_argument(
-            "Unable to establish a signal handler with no handler function.");
+    if (handler_function == nullptr)
+        throw std::invalid_argument("Unable to establish a signal handler with no handler function.");
 
     // check signal range
-    if (signal_number < SIGHUP || signal_number > SIGRTMAX) throw std::logic_error(
-            "Invalid signal number (out of range).");
+    if (signal_number < SIGHUP || signal_number > SIGRTMAX)
+        throw std::logic_error("Invalid signal number (out of range).");
 
     if (signal_number == SIGKILL)	// can not override KILL signal handler
-    throw std::logic_error("Action for signal SIGKILL can not be changed.");
+        throw std::logic_error("Action for signal SIGKILL can not be changed.");
 
     if (signal_number == SIGKILL)	// can not override STOP signal handler
-    throw std::logic_error("Action for signal SIGSTOP can not be changed.");
+        throw std::logic_error("Action for signal SIGSTOP can not be changed.");
 
     // set handler function and flags
     curent_signal_action.sa_sigaction = handler_function;
