@@ -40,8 +40,8 @@ SignalHandler::SignalHandler(int signal_number, SignalHandler_t handler_function
         throw std::invalid_argument("Unable to establish a signal handler with no handler function.");
 
     // SA_SIGINFO flag is set ? --> extended Signal handler must be used
-    if (sa_flags & SA_SIGINFO) throw std::invalid_argument(
-            "Flag SA_SIGINFO, but handler function is of the wrong type.");
+    if (sa_flags & SA_SIGINFO)
+        throw std::invalid_argument("Flag SA_SIGINFO, but handler function is of the wrong type.");
 
     // check signal range
     if (signal_number < SIGHUP || signal_number > SIGRTMAX)
