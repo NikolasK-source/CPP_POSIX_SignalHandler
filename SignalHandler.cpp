@@ -178,11 +178,6 @@ void SignalHandler::ignore( )
 // re-enable old style cast warning
 #pragma GCC diagnostic pop
 
-unsigned long SignalHandler::get_source_version( ) noexcept
-{
-    return SIGNAL_HANDLER_VERSION;
-}
-
 } /* namespace Signal */
 } /* namespace Koesling */
 } /* namespace de */

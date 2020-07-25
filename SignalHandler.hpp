@@ -17,8 +17,6 @@
 #include <csignal>
 #include <ostream>
 
-#define SIGNAL_HANDLER_VERSION 001000000UL     //!< Library version
-
 namespace de {
 namespace Koesling {
 namespace Signal {
@@ -144,11 +142,6 @@ class SignalHandler
          */
         static unsigned long get_source_version( ) noexcept;
 };
-
-inline unsigned long SignalHandler::get_header_version( ) noexcept
-{
-    return SIGNAL_HANDLER_VERSION;
-}
 
 inline void SignalHandler::set_error_stream(std::ostream &stream) noexcept
 {
